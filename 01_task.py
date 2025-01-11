@@ -1,8 +1,9 @@
 # Hangman game in python
 import random
 import os
+import platform
 
-answers = ("apple", "banana", "orange", "grapes", "gauva", "mango")
+answers = ("apple", "banana", "orange", "grapes", "guava", "mango")
 
 # dictionary of key :()
 hangman_art = {0: ("   ",
@@ -44,6 +45,13 @@ def display_answer(answer):
     print(" ".join(answer))
 
 
+# Clear the screen for the cross platform
+
+
+def clear_screen():
+    os.system("cls" if platform.system() == "Windows" else "clear")
+
+
 def main():
     # select a random answer from the list
     answer = random.choice(answers).lower()
@@ -59,7 +67,7 @@ def main():
     print(f"You have {max_attempts} incorrect guesses allowed")
     is_running = True
 
-    while is_running and attempts_left > 0:
+    while is_running:
         display_hangman(wrong_guesses)
         display_hint(hint)
         print(f"Number of chances you have: {attempts_left}")
@@ -71,12 +79,9 @@ def main():
 
         if guess in guessed_letters:
             print(f"{guess} is already guessed.")
+            input()
             attempts_left -= 1
             wrong_guesses += 1
-            os.system("clear")
-            display_hangman(wrong_guesses)
-            os.system("clear")
-            continue
 
         guessed_letters.add(guess)
 
@@ -85,23 +90,24 @@ def main():
                 if answer[i] == guess:
                     hint[i] = guess
         else:
-            wrong_guesses += 1
             attempts_left -= 1
+            wrong_guesses += 1
 
         if "_" not in hint:
-            os.system("clear")
+            clear_screen()
             display_hangman(wrong_guesses)
             display_answer(answer)
             print("You win")
             input()
             is_running = False
         elif attempts_left == 0:
-            os.system("clear")
+            clear_screen()
             display_hangman(wrong_guesses)
+            display_answer(answer)
             print("You lose!")
             input()
             is_running = False
-        os.system("clear")
+        clear_screen()
 
 
 if __name__ == "__main__":

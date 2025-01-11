@@ -3,8 +3,14 @@ import random
 import os
 import platform
 
-answers = ("apple", "banana", "orange", "grapes", "guava", "mango")
 
+answers = (
+    "apple", "banana", "orange", "grapes", "guava", "mango",
+    "pear", "peach", "cherry", "kiwi", "strawberry", "blueberry",
+    "raspberry", "pineapple", "watermelon", "papaya", "pomegranate",
+    "lemon", "lime", "coconut", "apricot", "blackberry", "dragonfruit",
+    "fig", "lychee", "nectarine", "plum", "passionfruit", "cantaloupe"
+)
 # dictionary of key :()
 hangman_art = {0: ("   ",
                    "   ",
